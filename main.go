@@ -9,5 +9,6 @@ func main() {
 }
 
 func hello(r *Router) {
+	println(r.Request.Header["Content-Type"][0])
 	r.Response.Write([]byte("hello world from the handler"))
 }

@@ -13,6 +13,7 @@ type (
 		Listener        net.Listener
 		ListenerNetwork string
 		Routes          map[string]Handler
+		Request         *http.Request
 		Response        http.ResponseWriter
 	}
 )
@@ -48,6 +49,7 @@ func (r *Router) newServer(s *http.Server) {
 
 func (r *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	r.Response = w
+	r.Request = req
 
 	if fn, ok := r.Routes[req.URL.Path]; ok {
 		fn(r)
